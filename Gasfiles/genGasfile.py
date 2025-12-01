@@ -106,7 +106,8 @@ def GenerateGasFile(gasfile, ncoll=11,):
         gas.SetPressure(p * 760)  # bar → Torr
 
     
-
+    gas.EnableAutoEnergyLimit(False)
+    gas.SetMaximumElectronEnergy(20)
     gas.SetFieldGrid(10,100000,20,True)
     #gas.PrintGas()
     
@@ -118,7 +119,7 @@ def GenerateGasFile(gasfile, ncoll=11,):
 
 
 if __name__ == "__main__":
-    
+
     try:
         filename = sys.argv[1]
     except:
