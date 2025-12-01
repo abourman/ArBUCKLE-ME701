@@ -1,31 +1,38 @@
 import os
 import sys
 import ROOT
-import Garfield
+import Garfield # pyright: ignore[reportMissingImports]
 import re
 
-def CheckFilename(filename):
+def ValidFilename(filename):
     #returns true if requested filename is valid
     pattern = r'^([A-Za-z0-9]+_\d+_){1,6}\d+bar(_\d+[CKck]))?\.gas$'
     return re.match(pattern, filename) is not None
 
-def CheckExitConditions(filename):
+def FileExists(filename):
     gas_dir = "Gasfiles"
     path = os.path.join(gas_dir, filename)
+    if os.path.exists(path) or os.path.exists(filename):
+        return True
+    else:
+        return False
+        
 
-    if os.path.exists(path):
-        print(f"Gas file already exists: {path}")
-        sys.exit(0)
-    elif os.path.exists(filename): # same check as above, but from Gasfile Directory
-        print(f"Gas file already exists: {path}")
-        sys.exit(0)
+def CheckExitConditions(filename, path):
 
-    if not CheckFilename(filename):
+    if not ValidFilename(filename):
         print("Invalid file name requested")
         print(
             "Generate New Gas Files: <gas>_<fraction>_<gas2>...<fraction-n>_<pressure>bar_<temp>C.gas"
         )
         sys.exit(0)
+    
+    gas_dir = "Gasfiles"
+    path = os.path.join(gas_dir, filename)
+    if not FileExists(filename):
+        print(f"Gas file already exists: {path}")
+        sys.exit(0)
+
     
     return None
 
@@ -116,6 +123,8 @@ def GenerateGasFile(gasfile, ncoll=11,):
     
     gas.GenerateGasTable(ncoll)
     gas.WriteGasFile(name+".gas")
+
+    return None
 
 
 if __name__ == "__main__":
