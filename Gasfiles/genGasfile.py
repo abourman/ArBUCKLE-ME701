@@ -18,7 +18,7 @@ def FileExists(filename):
         return False
         
 
-def CheckExitConditions(filename, path):
+def CheckExitConditions(filename):
 
     if not ValidFilename(filename):
         print("Invalid file name requested")
@@ -29,7 +29,7 @@ def CheckExitConditions(filename, path):
     
     gas_dir = "Gasfiles"
     path = os.path.join(gas_dir, filename)
-    if not FileExists(filename):
+    if FileExists(filename):
         print(f"Gas file already exists: {path}")
         sys.exit(0)
 
