@@ -6,7 +6,7 @@ import re
 
 def CheckFilename(filename):
     #returns true if requested filename is valid
-    pattern = r'^([A-Za-z0-9]+_\d+_){1,6}\d+bar(_\d+C)?\.gas$'
+    pattern = r'^([A-Za-z0-9]+_\d+_){1,6}\d+bar(_\d+[CKck]}))?\.gas$'
     return re.match(pattern, filename) is not None
 
 def CheckExitConditions(filename):
