@@ -6,7 +6,7 @@ import re
 
 def CheckFilename(filename):
     #returns true if requested filename is valid
-    pattern = r'^([A-Za-z0-9]+_\d+_){1,6}\d+bar(_\d+[CKck]))?\.gas$'
+    pattern = r'^([A-Za-z0-9]+_\d+_){1,6}\d+bar(_\d+[CKck]{1,1})?\.gas$'
     return re.match(pattern, filename) is not None
 
 def CheckExitConditions(filename):
@@ -107,7 +107,7 @@ def GenerateGasFile(gasfile, ncoll=11,):
 
     
     gas.EnableAutoEnergyLimit(False)
-    gas.SetMaximumElectronEnergy(20)
+    gas.SetMaxElectronEnergy(50)
     gas.SetFieldGrid(10,100000,20,True)
     #gas.PrintGas()
     
