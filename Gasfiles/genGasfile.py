@@ -118,11 +118,12 @@ def GenerateGasFile(gasfile, ncoll=11,):
     gas.SetFieldGrid(10,100000,20,True)
     #gas.PrintGas()
     
+    gas.GenerateGasTable(ncoll)
+    
     print("File will be written to:")
     print(f"Gasfiles/{name+".gas"}")
-    
-    gas.GenerateGasTable(ncoll)
-    gas.WriteGasFile(name+".gas")
+    output_directory = "Gasfiles/" if os.path.exists("Gasfiles") else ""
+    gas.WriteGasFile(output_directory+name+".gas")
 
     return None
 
