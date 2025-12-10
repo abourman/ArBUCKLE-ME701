@@ -115,7 +115,7 @@ def GenerateGasFile(gasfile, ncoll=11,):
     
     gas.EnableAutoEnergyLimit(False)
     gas.SetMaxElectronEnergy(50)
-    gas.SetFieldGrid(10,100000,20,True)
+    gas.SetFieldGrid(100,50000,20,True)
     #gas.PrintGas()
     
     gas.GenerateGasTable(ncoll)
