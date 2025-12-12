@@ -1,0 +1,65 @@
+# --- Settings ---
+
+# Simulation Fidelity {Coarse,Normal,Fine}
+sim_detail = Coarse
+
+## Outputs files (None or filename.txt):
+# Time Dependent Signal
+f_timed_signal = None
+
+# Signal Histogram
+f_charge_hist = None
+# Number of Events in Histogram
+n_events = 1
+
+# --- Garfield Object Settings ---
+
+## Gas object ---------------------------------------------------------------------------------
+# Medium Magboltx Gas File 
+gasfile = ar_100_5bar_25C.gas
+
+# Ion Mobilities to Load
+ionfile = IonMobility_Ar+_Ar.txt
+
+# Plot Electron and Ion speeds
+plot_e_vel = False
+plot_ion_vel = False
+
+## Component Object (Comsol is the only component implemented) --------------------------------
+cmp_type = COMSOL
+
+# Select which pre-computed potential to use {50-300 in steps of 50} {300-1400 in steps of 100}
+# [V]
+voltage = 200
+
+# Plot Electric Field lines
+plot_field = True
+
+# Plot White and Black Geometry
+plot_mesh = False
+
+
+## Signal Object -------------------------------------------------------------------------------
+# Maximum Time to Compute [ns]
+tmax = 2000
+
+## Drift Object --------------------------------------------------------------------------------
+# Object Selection: {MC,Micro,RKF}
+drift_mode = Micro
+
+## Track object settings -----------------------------------------------------------------------
+# Stopping Power Import
+srimfile = Alpha_Ar_5bar.txt
+
+# Initial Energy of Particle [eV]
+trackE = 5.5e6
+
+# Use Particle Straggling
+straggle = True
+
+# Source Type {Plated, Collimated} 
+src_type = Collimated
+
+# Produce Drift Lines and Signal Plots For First Particle
+plot_drift = True
+plot_signal = True
