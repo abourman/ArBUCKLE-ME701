@@ -3,14 +3,14 @@
 # Simulation Fidelity {Coarse,Normal,Fine}
 sim_detail = Coarse
 
-## Outputs files (None or filename.txt):
+## Outputs files (None or filename.npy):
 # Time Dependent Signal
-f_timed_signal = None
+f_timed_signal = Sig_t.npy
 
 # Signal Histogram
-f_charge_hist = None
+f_charge_hist = Hist.npy
 # Number of Events in Histogram
-n_events = 1
+n_events = 200
 
 # --- Garfield Object Settings ---
 
@@ -45,7 +45,7 @@ tmax = 2000
 
 ## Drift Object --------------------------------------------------------------------------------
 # Object Selection: {MC,Micro,RKF}
-drift_mode = Micro
+drift_mode = MC
 
 ## Track object settings -----------------------------------------------------------------------
 # Stopping Power Import

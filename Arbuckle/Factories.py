@@ -1,6 +1,7 @@
 import ROOT
 import Garfield # pyright: ignore[reportMissingImports]
 import Gasfiles.genGasfile
+import ctypes
 
 def Medium(inputs):
     gas = ROOT.Garfield.MediumMagboltz()
@@ -20,7 +21,7 @@ def Component(inputs,gas):
         )
         cmp.SetWeightingPotential(
             "Comsol/wpot.txt",
-            "V")
+            "W")
         #Set the correct domains to belong to the medium class
         nMat = cmp.GetNumberOfMaterials()
         for i in range(nMat):
@@ -33,7 +34,7 @@ def Component(inputs,gas):
 def Sensor(inputs,cmp):
     sens = ROOT.Garfield.Sensor()
     sens.AddComponent(cmp)
-    sens.AddElectrode(cmp,"V")
+    sens.AddElectrode(cmp,"W")
     wbin = {"Coarse":20,"Normal":10,"Fine":5}
     nbin = int(inputs[0]/wbin[inputs[1]])
     sens.SetTimeWindow(0,wbin[inputs[1]],nbin)
@@ -141,7 +142,6 @@ def Source(src_type):
     return [x, y, z, dx, dy, dz]
 
 def Compute(inputs,sens,track,drift):
-    import ctypes
 
     t0 = ctypes.c_double(0.0)
     tstep = ctypes.c_double(0.0)
@@ -153,6 +153,7 @@ def Compute(inputs,sens,track,drift):
     x, y, z, dx, dy, dz = Source(inputs[1])
     
     sens.ClearSignal()
+    sig = []
     track.NewTrack(x,y,z,t0,dx,dy,dz)
 
     if inputs[0].lower() == "mc":
@@ -180,7 +181,11 @@ def Compute(inputs,sens,track,drift):
         # Should never happen
         print("Invalid drift module")
     
-    return 0 
+    #pack signal
+    for i in range(nbin):
+        sig.append(sens.GetSignal("W",i))
+
+    return sig
 
 if __name__ == '__main__':
     quit()
