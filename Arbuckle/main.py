@@ -44,6 +44,13 @@ cfg = comm.bcast(cfg,root=0)
 
 ## Set up Garfield Objects on each Worker
 ## if size is == 1 build on Master
+gas = None
+cmp = None
+sens = None
+vd = None
+vm = None
+track = None
+drift = None
 if size == 1 or rank != 0:
     if rank <= cfg["n_events"]:
         gas = f.Medium([cfg["gasfile"],
@@ -62,14 +69,17 @@ if size == 1 or rank != 0:
 
 # pre-compute plots should only happen for the first worker
 # plot electron ion drift velocities from gas data
+canvases = []
 if (size > 1 and rank == 1) or (size == 1 and rank == 0):
     if cfg["plot_e_vel"]:
         c1 = ROOT.TCanvas("c1","",600,600)
         gas.PlotVelocity("e",c1)
+        canvases.append(c1)
 
     if cfg["plot_ion_vel"]:
         c2 = ROOT.TCanvas("c2","",600,600)
         gas.PlotVelocity("i",c2)
+        canvases.append(c2)
 
     if cfg["plot_mesh"]:
         vm = ROOT.Garfield.ViewFEMesh()
@@ -78,6 +88,7 @@ if (size > 1 and rank == 1) or (size == 1 and rank == 0):
         vm.SetFillMesh(True)
         vm.SetArea(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5)
         vm.Plot()
+
 
     if cfg["plot_field"]:
         c3 = ROOT.TCanvas("c3","",600,600)
@@ -151,6 +162,7 @@ elif rank != 0:
                 if cfg["plot_signal"]:
                     c4 = ROOT.TCanvas("c4","",600,600)
                     sens.PlotSignal("W",c4)
+                    canvases.append(c4)
 
                 if cfg["plot_drift"]:
                     c5 = ROOT.TCanvas("c5","",600,600)
@@ -158,6 +170,7 @@ elif rank != 0:
                     vd.SetArea(-.23,-.23, -0.04,.23,.23,0.34)
                     vd.SetCanvas(c5)
                     vd.Plot(True)
+                    canvases.append(c5)
             
             comm.isend({"data":sig,"worker":rank},dest=0,tag=2)
         else:
@@ -182,6 +195,7 @@ else:
     if cfg["plot_signal"]:
         c4 = ROOT.TCanvas("c4","",600,600)
         sens.PlotSignal("W",c4)
+        canvases.append(c4)
 
     if cfg["plot_drift"]:
         c5 = ROOT.TCanvas("c5","",600,600)
@@ -189,6 +203,7 @@ else:
         vd.SetArea(-.23,-.23, -0.04,.23,.23,0.34)
         vd.SetCanvas(c5)
         vd.Plot(True)
+        canvases.append(c5)
 
     if cfg["f_timed_signal"] is not None:
         np.save("Outputs/"+cfg["f_timed_signal"],one_sig)

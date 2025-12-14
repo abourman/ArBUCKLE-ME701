@@ -50,7 +50,7 @@ fi
 
 echo "==> Creating conda environment: $ENV_NAME"
 conda config --set channel_priority strict
-conda create -c conda-forge --name "$ENV_NAME" root cmake # <------------- Add python packages here if needed ------------
+conda create -c conda-forge --name "$ENV_NAME" root cmake mpi4py # <------------- Add python packages here if needed ------------
 
 echo "==> Activating environment"
 source "$(conda info --base)/etc/profile.d/conda.sh"

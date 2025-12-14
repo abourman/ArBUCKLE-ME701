@@ -6,7 +6,7 @@ import ctypes
 def Medium(inputs):
     gas = ROOT.Garfield.MediumMagboltz()
     gas.LoadGasFile("Gasfiles/"+inputs[0])
-    gas.LoadIonMobility(inputs[0])
+    gas.LoadIonMobility(inputs[1])
     
     return gas
 

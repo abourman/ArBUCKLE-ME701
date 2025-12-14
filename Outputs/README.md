@@ -1,1 +1,1 @@
-Outputs bin files are auto saved here.
+Outputs binaries are dumped here

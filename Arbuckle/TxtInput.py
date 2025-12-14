@@ -55,7 +55,8 @@ if __name__ == "__main__":
         filename = sys.argv[1]
     except:
         print("No Input File Given")
-        print("Use: python Input.py input.txt")    
+        print("Use: python Input.py input.txt")  
+        sys.exit()  
     
     cfg = load_config(filename)
     print("Loaded configuration:")
