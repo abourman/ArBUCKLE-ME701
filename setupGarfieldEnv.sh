@@ -102,14 +102,19 @@ source "$(conda info --base)/envs/garfield/garfieldpp/install/share/Garfield/set
 
 # --- Arbuckle MPI wrapper ---
 arbuckle() {
-    if [ $# -lt 1 ]; then
+    if [ "$#" -lt 1 ]; then
         echo "Usage: arbuckle [mpirun options] <input-file>"
         echo "Example: arbuckle -np 4 Input.txt"
         return 1
     fi
 
-    input="${@: -1}"          # last argument
-    mpi_args=("${@:1:$#-1}")  # all but last
+    mpi_args=("$@")
+
+    # Index of last element
+    last=$(( ${#mpi_args[@]} - 1 ))
+
+    input="${mpi_args[$last]}"
+    unset 'mpi_args[$last]'
 
     mpirun "${mpi_args[@]}" python -m Arbuckle.main "$input"
 }
