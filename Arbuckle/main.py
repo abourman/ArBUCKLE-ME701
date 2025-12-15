@@ -125,11 +125,6 @@ if size > 1 and rank == 0:
         if comm.Iprobe(source=MPI.ANY_SOURCE, tag=2):
             data = comm.recv(source=MPI.ANY_SOURCE, tag=2)  # tag = 2  {"data":[],"worker:rank"}
             worker = data["worker"]
-            data_a = np.array(data["data"])
-            if type(one_sig) != np.ndarray:
-                one_sig += data_a
-            avg_sig += data_a/n_events
-            hist.append(sum(data_a))
 
             if n_jobs_sent % 50 == 0:
                 print(f"{n_jobs_sent} of {n_events} events complete")
@@ -143,6 +138,13 @@ if size > 1 and rank == 0:
             else:
                 comm.isend(0,dest=worker,tag=0)
                 n_active_wkrs -= 1
+            
+            data_a = np.array(data["data"])
+            if type(one_sig) != np.ndarray:
+                one_sig += data_a
+            avg_sig += data_a/n_events
+            hist.append(sum(data_a))
+    
     if cfg["f_timed_signal"] is not None:
         np.save("Outputs/"+cfg["f_timed_signal"],one_sig)
 
