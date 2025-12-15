@@ -99,6 +99,22 @@ DEACTIVATE_SCRIPT="$DEACTIVATE_DIR/deactivate-garfield.sh"
 cat > "$ACTIVATE_SCRIPT" <<EOF
 #!/bin/bash
 source "$(conda info --base)/envs/garfield/garfieldpp/install/share/Garfield/setupGarfield.sh"
+
+# --- Arbuckle MPI wrapper ---
+arbuckle() {
+    if [ $# -lt 1 ]; then
+        echo "Usage: arbuckle [mpirun options] <input-file>"
+        echo "Example: arbuckle -np 4 Input.txt"
+        return 1
+    fi
+
+    input="${@: -1}"          # last argument
+    mpi_args=("${@:1:$#-1}")  # all but last
+
+    mpirun "${mpi_args[@]}" python -m Arbuckle.main "$input"
+}
+
+export -f arbuckle
 EOF
 
 # Create deactivation script
@@ -108,6 +124,9 @@ unset GARFIELD_INSTALL
 export CMAKE_PREFIX_PATH=\$(echo "\$CMAKE_PREFIX_PATH" | sed "s|\$GARFIELD_HOME/install:||")
 export LD_LIBRARY_PATH=\$(echo "\$LD_LIBRARY_PATH" | sed "s|\$GARFIELD_HOME/install/lib:||")
 export PYTHONPATH=\$(echo "\$PYTHONPATH" | sed "s|\$GARFIELD_HOME/install/lib/python3.13/site-packages/:||")
+
+# --- Remove arbuckle function ---
+unset -f arbuckle 2>/dev/null
 EOF
 
 #chmod +x "$ACTIVATE_SCRIPT" "$DEACTIVATE_SCRIPT" #not needed
