@@ -96,7 +96,7 @@ ACTIVATE_SCRIPT="$ACTIVATE_DIR/activate-garfield.sh"
 DEACTIVATE_SCRIPT="$DEACTIVATE_DIR/deactivate-garfield.sh"
 
 # Create activation script
-cat > "$ACTIVATE_SCRIPT" <<EOF
+cat > "$ACTIVATE_SCRIPT" <<'EOF'
 #!/bin/bash
 source "$(conda info --base)/envs/garfield/garfieldpp/install/share/Garfield/setupGarfield.sh"
 
@@ -123,7 +123,7 @@ export -f arbuckle
 EOF
 
 # Create deactivation script
-cat > "$DEACTIVATE_SCRIPT" <<EOF
+cat > "$DEACTIVATE_SCRIPT" <<'EOF'
 #!/bin/bash
 unset GARFIELD_INSTALL
 export CMAKE_PREFIX_PATH=\$(echo "\$CMAKE_PREFIX_PATH" | sed "s|\$GARFIELD_HOME/install:||")
@@ -142,5 +142,3 @@ echo "    conda activate $ENV_NAME"
 echo "Test evironment with:"
 echo "    cd $GARFIELD_HOME/source/Examples/DriftTube"
 echo "    python -i mdt.py"
-
-
