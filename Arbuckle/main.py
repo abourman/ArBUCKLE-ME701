@@ -214,7 +214,8 @@ else:
         np.save("Outputs/"+cfg["f_charge_hist"],np.array(hist))
 
 if rank == 0:
-    input("Press any key to end\n")
+    if cfg["plot_e_vel"] or cfg["plot_ion_vel"] or cfg["plot_field"] or cfg["plot_mesh"] or cfg["plot_drift"] or cfg["plot_signal"]:
+        input("Press any key to end\n")
 
 comm.Barrier()
 MPI.Finalize()

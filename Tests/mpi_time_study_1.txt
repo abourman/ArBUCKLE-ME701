@@ -1,0 +1,60 @@
+# MPI scaling study
+# Command: arbuckle -np N Input.txt
+# Columns: NPROCS REAL_TIME_SECONDS
+# Coarse 200 events
+1 
+real	1m51.209s
+user	1m48.100s
+sys	0m0.690s
+2 
+real	2m9.634s
+user	4m16.668s
+sys	0m0.686s
+3 
+real	1m11.567s
+user	3m30.769s
+sys	0m1.174s
+4 
+real	1m4.125s
+user	4m9.665s
+sys	0m1.779s
+5 
+real	0m50.831s
+user	4m2.828s
+sys	0m3.001s
+6 
+real	0m45.792s
+user	4m27.305s
+sys	0m3.152s
+7 
+real	0m40.463s
+user	4m31.672s
+sys	0m3.960s
+8 
+real	0m40.672s
+user	5m4.151s
+sys	0m4.565s
+9 
+real	0m36.242s
+user	5m10.043s
+sys	0m5.919s
+10 
+real	0m38.313s
+user	6m3.742s
+sys	0m7.181s
+11 
+real	0m36.709s
+user	6m20.465s
+sys	0m7.928s
+12 
+real	0m37.692s
+user	7m8.665s
+sys	0m9.412s
+13 
+real	0m38.053s
+user	7m43.715s
+sys	0m11.261s
+14 
+real	0m39.100s
+user	8m35.909s
+sys	0m15.051s
