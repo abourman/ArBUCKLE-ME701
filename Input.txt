@@ -1,16 +1,20 @@
 # --- Settings ---
 
 # Simulation Fidelity {Coarse,Normal,Fine}
-sim_detail = Coarse
+sim_detail = Normal
 
 ## Outputs files (None or filename.npy):
-# Time Dependent Signal
-f_timed_signal = Sig_t.npy
+# Individual Time-Dependent Signal
+f_timed_signal = Sig_new.npy
+
+# Average Time-Dependent Signal from n_events
+t_avg_timed_signal = Sig_avg.npy
 
 # Signal Histogram
-f_charge_hist = Hist.npy
+f_charge_hist = None
+
 # Number of Events in Histogram
-n_events = 200
+n_events = 1
 
 # --- Garfield Object Settings ---
 
@@ -30,10 +34,10 @@ cmp_type = COMSOL
 
 # Select which pre-computed potential to use {50-300 in steps of 50} {300-1400 in steps of 100}
 # [V]
-voltage = 200
+voltage = 600
 
 # Plot Electric Field lines
-plot_field = True
+plot_field = False
 
 # Plot White and Black Geometry
 plot_mesh = False
@@ -45,7 +49,7 @@ tmax = 2000
 
 ## Drift Object --------------------------------------------------------------------------------
 # Object Selection: {MC,Micro,RKF}
-drift_mode = MC
+drift_mode = Micro
 
 ## Track object settings -----------------------------------------------------------------------
 # Stopping Power Import
@@ -58,8 +62,8 @@ trackE = 5.5e6
 straggle = True
 
 # Source Type {Plated, Collimated} 
-src_type = Collimated
+src_type = Plated
 
 # Produce Drift Lines and Signal Plots For First Particle
-plot_drift = True
-plot_signal = True
+plot_drift = False
+plot_signal = False
