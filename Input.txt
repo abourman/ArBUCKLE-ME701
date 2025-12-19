@@ -1,14 +1,14 @@
 # --- Settings ---
 
 # Simulation Fidelity {Coarse,Normal,Fine}
-sim_detail = Normal
+sim_detail = Coarse
 
 ## Outputs files (None or filename.npy):
 # Individual Time-Dependent Signal
-f_timed_signal = Sig_new.npy
+f_timed_signal = None
 
 # Average Time-Dependent Signal from n_events
-t_avg_timed_signal = Sig_avg.npy
+f_avg_timed_signal = None
 
 # Signal Histogram
 f_charge_hist = None
@@ -19,14 +19,14 @@ n_events = 1
 # --- Garfield Object Settings ---
 
 ## Gas object ---------------------------------------------------------------------------------
-# Medium Magboltx Gas File 
+# Medium Magboltz Gas File 
 gasfile = ar_100_5bar_25C.gas
 
 # Ion Mobilities to Load
 ionfile = IonMobility_Ar+_Ar.txt
 
-# Plot Electron and Ion speeds
-plot_e_vel = False
+# Plot Electron and Ion speeds vs Electric Field
+plot_e_vel = True
 plot_ion_vel = False
 
 ## Component Object (Comsol is the only component implemented) --------------------------------
@@ -34,10 +34,10 @@ cmp_type = COMSOL
 
 # Select which pre-computed potential to use {50-300 in steps of 50} {300-1400 in steps of 100}
 # [V]
-voltage = 600
+voltage = 200
 
 # Plot Electric Field lines
-plot_field = False
+plot_field = True
 
 # Plot White and Black Geometry
 plot_mesh = False
@@ -49,14 +49,14 @@ tmax = 2000
 
 ## Drift Object --------------------------------------------------------------------------------
 # Object Selection: {MC,Micro,RKF}
-drift_mode = Micro
+drift_mode = MC
 
 ## Track object settings -----------------------------------------------------------------------
 # Stopping Power Import
 srimfile = Alpha_Ar_5bar.txt
 
 # Initial Energy of Particle [eV]
-trackE = 5.5e6
+trackE = 4.5e6
 
 # Use Particle Straggling
 straggle = True
@@ -65,5 +65,5 @@ straggle = True
 src_type = Plated
 
 # Produce Drift Lines and Signal Plots For First Particle
-plot_drift = False
-plot_signal = False
+plot_drift = True
+plot_signal = True

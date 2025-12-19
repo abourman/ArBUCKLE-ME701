@@ -150,6 +150,9 @@ if size > 1 and rank == 0:
 
     if cfg["f_charge_hist"] is not None:
         np.save("Outputs/"+cfg["f_charge_hist"],np.array(hist))
+    
+    if cfg["f_avg_timed_signal"] is not None:
+        np.save("Outputs/"+cfg["f_avg_timed_signal"],np.array(avg_sig))
 
 elif rank != 0:
     while True:
@@ -212,6 +215,9 @@ else:
 
     if cfg["f_charge_hist"] is not None:
         np.save("Outputs/"+cfg["f_charge_hist"],np.array(hist))
+
+    if cfg["f_avg_timed_signal"] is not None:
+        np.save("Outputs/"+cfg["f_avg_timed_signal"],np.array(avg_sig))
 
 if rank == 0:
     if cfg["plot_e_vel"] or cfg["plot_ion_vel"] or cfg["plot_field"] or cfg["plot_mesh"] or cfg["plot_drift"] or cfg["plot_signal"]:
